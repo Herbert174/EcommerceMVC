@@ -75,13 +75,6 @@
                                         {
                                         $('#modal-fretes').modal('hide');
                                         $('#btn_compra').html(data);
-                                        $.ajax({
-                                            url: 'atualiza_preco_total',
-                                            success: function(data)
-                                                {
-                                                $('#valor_total').html(data);
-                                                }
-                                        });
                                         }
                                 });
 						    });
