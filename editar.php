@@ -6,6 +6,7 @@
 
     $Produto = new ProdutoController();
     $dados_id = $Produto->RecuperarProdutoController();
+	$id = $dados_id['id_produto'];
 
 ?>
 
@@ -90,7 +91,7 @@
       	</div>
 
       	<div class="row">
-      		<form method="POST" enctype="multipart/form-data" action="editar_action?id_produto=<?=$id?>">
+      		<form method="POST" enctype="multipart/form-data" action="Controller?Controller=Produto&Action=EditarProdutoController&id_produto=<?=$id?>">
         	<div class="col-sm-7">
         		<div class="form-group">
         			<label>

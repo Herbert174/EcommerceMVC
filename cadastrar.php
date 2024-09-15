@@ -73,7 +73,7 @@
       	</div>
 
       	<div class="row"><!-- Row onde ficará o form que será enviado para o banco de dados -->
-      		<form enctype="multipart/form-data" method="POST" action="cadastrando">
+      		<form enctype="multipart/form-data" method="POST" action="Controller?Controller=Produto&Action=CadastrarProdutoController">
         	<div class="col-sm-7">
         		<div class="form-group">
 	        		<label>
