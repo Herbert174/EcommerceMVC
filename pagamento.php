@@ -4,7 +4,7 @@
 
     $erro = isset($_GET['erro']) ? $_GET['erro'] : 0;
 
-    $valor = $_SESSION['valor'];
+    $valor = $_SESSION['valor_convertido'];
 
     if(isset($_SESSION['usuario']))
         {

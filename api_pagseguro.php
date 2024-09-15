@@ -23,7 +23,6 @@
     $valorcompra = $valortotal + $valorfrete;
 
     $_SESSION['preco_frete'] = $valorfrete;
-    $_SESSION['valor_compra'] = $valorcompra;
 
     require_once('Framework/Model/db.class.php');
     $id_usuario  = $_SESSION['id_usuario'];

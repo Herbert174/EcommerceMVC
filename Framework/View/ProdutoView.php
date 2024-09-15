@@ -804,7 +804,8 @@
                 echo '</div';
                 }
 
-            $_SESSION['valor'] = $valor1;
+            $_SESSION['valor'] = $valor;
+            $_SESSION['valor_convertido'] = $valor1;
 
             $_SESSION['comprimento_produto'] = $comprimento_soma;
             $_SESSION['altura_produto']      = $altura_soma;
@@ -862,7 +863,8 @@
                 echo '</div';
                 }
 
-            $_SESSION['valor'] = $valor1;
+            $_SESSION['valor'] = $valor;
+            $_SESSION['valor_convertido'] = $valor1;
 
             $_SESSION['comprimento_produto'] = $comprimento_soma;
             $_SESSION['altura_produto']      = $altura_soma;
