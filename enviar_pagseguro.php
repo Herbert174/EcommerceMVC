@@ -1,7 +1,7 @@
 <?php
 
     session_start();
-    require_once('db.class.php');
+    require_once('Framework/Model/db.class.php');
 
     $id_usuario = isset($_SESSION['id_usuario']) ? $_SESSION['id_usuario'] : 0;
     $pagseguro = $_SESSION['link_pagseguro'];
