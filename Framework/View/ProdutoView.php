@@ -718,7 +718,7 @@
                     $cinco_estrelas = 'ativo';
                     }
                 echo '<div class="col-md-3 custom1 borda">';
-                echo '<a href="consulta_produto?produto='.$produto['id_produto'].'">';
+                echo '<a href="pagina_produto?produto='.$produto['id_produto'].'">';
                 echo '<img class="img-responsive img-custom" src="'.$produto['imagem'].'"></a><br>';
                 echo '<p><b>Produto:</b> <span class="direita">'.$produto['nome_produto'].'</span></p>';
                 echo '<p><b>Preço:</b> <span class="direita">R$ '.$preco.'</span></p>';
