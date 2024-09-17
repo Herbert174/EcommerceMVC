@@ -4,8 +4,9 @@
 
     include_once "Framework/Controller/EcommerceController.php";
     
-    $Transacao = new TransacaoController();
+    $Comentario = new ComentarioController();
     $Usuario = new UsuarioController();
+    $Produto = new ProdutoController();
 
 	if($Usuario->VerificarAcessoAdmController())
 		{
@@ -105,67 +106,21 @@
         </div>
         <!-- Sidebar end -->
 
-        <div class="modal fade" id="modal-endereco">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
-                    <h4 class="modal-title">Endereço de entrega</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <div id="endereco">
-                            </div>
-                        </div>
-                    </div>                                             
-                </div>
-                <div class="modal-footer">
-                </div>
-            </div>
-        </div>
-        </div>
-
-		<div class="modal fade" id="modal-produtos">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
-                    <h4 class="modal-title">Lista de produtos</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <div id="produtos">
-                            </div>
-                        </div>
-                    </div>                                             
-                </div>
-                <div class="modal-footer">
-                </div>
-            </div>
-        </div>
-        </div>
-
         <section class="content">
 	    	<div class="page-header">
                 <h4>Filtro(s)</h4>
-                <form method="GET" action="painel_transacoes">
-                <input type="text" class="form-control inputPainel" name="comprador" placeholder="Filtrar por comprador" />
-                <br>
-                <select class="form-control" name="status">
-                    <option value="">Selecione um status de pagamento</option>
-                    <option value="Pago">Pago</option>
-                    <option value="Aguardando Pagamento">Aguardando Pagamento</option>
-                    <option value="Em disputa">Em disputa</option>
-                    <option value="Cancelado">Cancelado</option>
-                    <option value="Estornado">Estornado</option>
+                <form method="GET" action="painel_comentarios">
+                <select class="form-control" name="usuario">
+                    <option value="">Selecione um usuario</option>
+                    <?php echo $Usuario->ExibirSelectUsuariosController(); ?>
                 </select><br>
+                <input type="number" class="form-control inputPainel" name="produto" placeholder="Filtrar por ID de produto" />
+                <br>
                 <input type="submit" class="btn btn_envio" value="Realizar filtro"><br>
                 </form>
                 <br>
-                <a href="painel_transacoes"><input type="button" class="btn btn_envio" value="Limpar filtro"></a><br><br>
-	        	<h1>Compras realizadas</h1>
+                <a href="painel_comentarios"><input type="button" class="btn btn_envio" value="Limpar filtro"></a><br><br>
+	        	<h1>Comentarios</h1>
 	      	</div>
 
 		    <div class="row">
@@ -173,17 +128,15 @@
 					<table class="table table-hover">
 						<thead class="tabela_custom">
 							<tr>
-								<th class="centro1" scope="col">Codigo de Referência</th>
-								<th class="centro1" scope="col">Comprador</th>
-								<th class="centro1" scope="col">Valor da compra</th>
-								<th class="centro1" scope="col">Status de pagamento</th>
-                                <th class="centro1" scope="col">Endereço</th>
-								<th class="centro1" scope="col">Produtos</th>
-                                <th class="centro1" scope="col">Codigo de Transação</th>
+								<th class="centro1" scope="col">Usuario</th>
+								<th class="centro1" scope="col">Comentario</th>
+								<th class="centro1" scope="col">Data Comentario</th>
+								<th class="centro1" scope="col">Id Produto</th>
+                                <th class="centro1" scope="col">Ação</th>
 							</tr>
 						</thead>
 						<tbody><!-- Area onde é exibido os produtos já cadastrados no banco de dados -->
-						    <?php echo $Transacao->ExibirAllTransacoesController(); ?>
+						    <?php echo $Comentario->ExibirAllComentariosController(); ?>
 						</tbody>
 					</table>
 				</div>
@@ -198,40 +151,23 @@
 
         <script type="text/javascript">
             $(document).ready(function(){
-                $('.btn_endereco').click( function()
+                $('.btn_apagar_comentario').click( function()
                     {
-                    var id = $(this).data('codigoreferencia');
-                    $.ajax({
-                            url: 'Controller',
-                            method: 'get',
-                            data: {CodigoReferencia: id,
-                                Controller: 'Transacao',
-                                Action: 'ExibirEnderecoEntregaTransacaoController',
-                            },
-                            success: function(data)
-                                {
-                                $('#endereco').html(data);
-                                $('#modal-endereco').modal();
-                                }
-                        });
-                    });
-
-                $('.btn_produtos').click( function()
-                    {
-                    var id = $(this).data('codigoreferencia');
-                    $.ajax({
-                            url: 'Controller',
-                            method: 'get',
-                            data: {CodigoReferencia: id,
-                                Controller: 'Transacao',
-                                Action: 'ExibirProdutosTransacaoControler',
-                            },
-                            success: function(data)
-                                {
-                                $('#produtos').html(data);
-                                $('#modal-produtos').modal();
-                                }
-                        });
+                    var id = $(this).data('idcomentario');
+                    if(confirm('Esta ação apagará o comentario em definitivo!'))
+                        {
+                        $.ajax({
+                                url: 'Controller',
+                                method: 'get',
+                                data: {IdComentario: id,
+                                    Controller: 'Comentario',
+                                    Action: 'ApagarComentarioController',
+                                },
+                                success: function(data)
+                                    {
+                                    }
+                            });
+                        }
                     });
             });
         </script>

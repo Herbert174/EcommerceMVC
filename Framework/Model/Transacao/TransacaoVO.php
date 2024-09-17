@@ -179,6 +179,16 @@
             {
             $this->TipoFrete = $TipoFreteEnviado;
             }
+
+        public function retornaNomeComprador()
+            {
+            return $this->NomeComprador;
+            }
+
+        public function defineNomeComprador($NomeCompradorEnviado)
+            {
+            $this->NomeComprador = $NomeCompradorEnviado;
+            }
         }
 
 ?>

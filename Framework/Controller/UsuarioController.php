@@ -55,6 +55,49 @@
                 header("Location: index"); //Futuramente pagina de admin
                 }else die ('Ocorreu um erro ao tentar apagar esta conta');
             }
+
+        public function AcessoUsuarioAdmController()
+            {
+            $Model = new UsuarioModel();
+            $VO = new UsuarioVO();
+            $Nome = $_POST['usuario'];
+            $Senha = md5($_POST['senha']);
+
+            $VO->defineNomeUsuario($Nome);
+            $VO->defineSenhaUsuario($Senha);
+
+            if($Model->AcessoUsuarioAdmModel($VO))
+                {
+                header("Location: crud");
+                }else
+                    {
+                    header("Location: index");
+                    }
+            }
+
+        public function VerificarAcessoAdmController()
+            {
+            $Model = new UsuarioModel();
+            $VO = new UsuarioVO();
+            $Usuario = $_SESSION['id_usuario'];
+
+            if($Usuario == 13)
+                {
+                return true;
+                }else
+                    {
+                    return false;
+                    }
+            }
+
+        public function ExibirSelectUsuariosController()
+            {
+            $Model = new UsuarioModel();
+            $View = new UsuarioView();
+
+            $Usuarios = $Model->RecuperarUsuariosModel();
+            return $View->ExibirSelectUsuariosView($Usuarios);
+            }
         }
 
 ?>

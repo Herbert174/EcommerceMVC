@@ -132,6 +132,53 @@
                 } else
                     return true;
             }
+
+        public function AcessoUsuarioAdm(UsuarioVO $Usuario)
+            {
+            $nome = $Usuario->retornaNomeUsuario();
+            $senha = $Usuario->retornaSenhaUsuario();
+
+            $objDb = new database();
+            $link = $objDb->conecta_mysql();
+            
+            $sql = " SELECT * FROM usuarios WHERE nome = '$nome' AND senha = '$senha' ";
+
+            if($Resultado = mysqli_query($link, $sql))
+                {
+                if($Resultado)
+                    {
+                    $dados_usuario = mysqli_fetch_array($Resultado);
+                    if($dados_usuario['id'] == 13)
+                        {
+                        $_SESSION['id_usuario'] = $dados_usuario['id'];
+                        $_SESSION['usuario'] = $dados_usuario['nome'];
+                        $_SESSION['email'] = $dados_usuario['email'];
+                        $objDb->desconecta_mysql($link);
+            
+                        return true;
+                        }else{
+                            $objDb->desconecta_mysql($link);
+                            return false;
+                            }
+                    }else{
+                        echo 'Erro na execução da consulta, favor entrar em contato com o admin do site';
+                        }
+                }
+            }
+
+        public function RecuperarUsuarios()
+            {
+            $objDb = new database();
+            $link = $objDb->conecta_mysql();
+
+            $sql = " SELECT id, nome FROM usuarios ";
+
+            if($ConsultaUsuario = mysqli_query($link, $sql))
+                {
+                $Usuarios = mysqli_fetch_all($ConsultaUsuario, MYSQLI_ASSOC);
+                return $Usuarios;
+                }
+            }
         }
 
 ?>

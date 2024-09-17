@@ -33,6 +33,18 @@
             $usuario = new UsuarioDAO();
             return $usuario->ApagarUsuario($IdUsuario);
             }
+
+        public function AcessoUsuarioAdmModel(UsuarioVO $Usuario)
+            {
+            $usuario = new UsuarioDAO();
+            return $usuario->AcessoUsuarioAdm($Usuario);
+            }
+
+        public function RecuperarUsuariosModel()
+            {
+            $usuario = new UsuarioDAO();
+            return $usuario->RecuperarUsuarios();
+            }
         }
 
 ?>

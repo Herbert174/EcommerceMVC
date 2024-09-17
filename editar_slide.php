@@ -9,6 +9,16 @@
 	$dados_destaques = $retorno[1];
 	$dados_destaque = $retorno[0];
 
+	$Usuario = new UsuarioController();
+
+	if($Usuario->VerificarAcessoAdmController())
+		{
+		
+		}else
+			{
+			header("Location: index");
+			}
+
 ?>
 
 <!doctype html>
@@ -68,6 +78,7 @@
 			<a href="painel_transacoes"><i class="fas fa-table"></i><span>Dashboard de transações</span></a>
 			<a href="editar_slide"><i class="fas fa-th"></i><span>Produtos em destaque</span></a>
 			<a href="cadastrar"><i class="fas fa-info-circle"></i><span>Cadastrar produto</span></a>
+			<a href="painel_comentarios"><i class="fas fa-info-circle"></i><span>Comentarios</span></a>
 			<a href="index"><i class="fas fa-sliders-h"></i><span>Sair do painel</span></a>
 		</div>
 	</div>
@@ -82,6 +93,7 @@
 		<a href="painel_transacoes"><i class="fas fa-table"></i><span>Dashboard de transações</span></a>
 		<a href="editar_slide"><i class="fas fa-th"></i><span>Produtos em destaque</span></a>
 		<a href="cadastrar"><i class="fas fa-info-circle"></i><span>Cadastrar produto</span></a>
+		<a href="painel_comentarios"><i class="fas fa-info-circle"></i><span>Comentarios</span></a>
 		<a href="index"><i class="fas fa-sliders-h"></i><span>Sair do painel</span></a>
 	</div>
 	<!-- Sidebar end -->

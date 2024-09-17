@@ -205,6 +205,38 @@
         </div>
         </div>
 
+        <div class="modal fade" id="modal-gerenciamento">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+                    <h4 class="modal-title">Acesso painel</h4>
+                </div>
+                <div class="modal-body">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="col-md-8">
+                            <form method="post" action="Controller?Controller=Usuario&Action=AcessoUsuarioAdmController" enctype="multipart/form-data">
+                                <div class="estrelas">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control inputPainel" id="campo_usuario" name="usuario" placeholder="Usuário" />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control red inputPainel" id="campo_senha" name="senha" placeholder="Senha" />
+                                    </div>
+                                    <input class="btn btn-default btn-block botao" type="submit" value="Acessar">
+                                </div>
+                            </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>                                             
+                </div>
+            </div>
+        </div>
+        </div>
+
         <div class="col-sm-12 div_custom">
             <img class="img_capa" src="imagens/LogoCapa.png">
         </div>
@@ -349,7 +381,7 @@
                         <a class="link-custom" href="Produtos?secao=4">Fones</a><br>
                         <a class="link-custom" href="Produtos?secao=5">Carregadores</a><br>
                         <a class="link-custom" href="Produtos?secao=6">Calçados</a><br>
-                        <a class="link-custom" href="crud">CRUD</a>
+                        <a class="link-custom" href="#" disabled data-toggle="modal" data-target="#modal-gerenciamento">CRUD</a>
                     </div>
                     <div class="col-md-3">
                         <br>

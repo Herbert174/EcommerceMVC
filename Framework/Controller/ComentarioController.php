@@ -41,6 +41,40 @@
             $Comentarios = $Model->RecuperarComentariosProdutoModel($VO);
             return $View->ExibirComentariosView($Comentarios);
             }
+
+        public function ExibirAllComentariosController()
+            {
+            $Model = new ComentarioModel();
+            $VO = new ComentarioVO();
+            $View = new ComentarioView();
+
+            if(isset($_GET['usuario']))
+                {
+                $usuario = $_GET['usuario'];
+                $produto = $_GET['produto'];
+
+                $VO->defineIdUsuario($usuario);
+                $VO->defineIdProduto($produto);
+
+                $Comentarios = $Model->RecuperarFiltroComentariosModel($VO);
+                return $View->ExibirAllComentariosView($Comentarios);
+                }
+
+            $Comentarios = $Model->RecuperarAllComentariosModel();
+            return $View->ExibirAllComentariosView($Comentarios);
+            }
+
+        public function ApagarComentarioController()
+            {
+            $Model = new ComentarioModel();
+            $VO = new ComentarioVO();
+
+            $IdComentario = $_GET['IdComentario'];
+
+            $VO->defineIdComentario($IdComentario);
+
+            $Model->ApagarComentarioModel($VO);
+            }
         }
 
 ?>

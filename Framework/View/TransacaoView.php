@@ -303,6 +303,16 @@
                 echo '</div>';
             echo '</div>';
             }
+
+        public function ExibirSelectCompradoresView($Compradores)
+            {
+            $retorno_lista = '';
+            foreach($Compradores as $Comprador)
+                {
+                $retorno_lista .= '<option value="'.$Comprador['nome_comprador'].'">'.$Comprador['nome_comprador'].'</option>';
+                }
+            return $retorno_lista;
+            }
         }
 
 ?>

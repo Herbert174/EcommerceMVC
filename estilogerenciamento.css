@@ -358,7 +358,7 @@ label #sidebar_btn:hover{
 	.sidebar{width: 170px;}
 	.content{margin-left: 170px;}
 	.sidebar span{font-size: 9px;}
-	.profile_info{margin-bottom: -35px;}
+	.profile_info{margin-bottom: -20px;}
 	}
 
 /* 150% Tela 1366 x 768 */
@@ -376,7 +376,7 @@ label #sidebar_btn:hover{
 	.sidebar{width: 190px;}
 	.content{margin-left: 190px;}
 	.sidebar span{font-size: 10px;}
-	.profile_info{margin-bottom: 10px;}
+	.profile_info{margin-bottom: 0px;}
 	}
 
 /* 130% Tela 1366 x 768 */
@@ -385,7 +385,7 @@ label #sidebar_btn:hover{
 	.sidebar{width: 200px;}
 	.content{margin-left: 200px;}
 	.sidebar span{font-size: 11px;}
-	.profile_info{margin-bottom: 30px;}
+	.profile_info{margin-bottom: 0px;}
 	}
 
 /* 120% Tela 1366 x 768 */
@@ -394,7 +394,7 @@ label #sidebar_btn:hover{
 	.sidebar{width: 220px;}
 	.content{margin-left: 220px;}
 	.sidebar span{font-size: 12px;}
-	.profile_info{margin-bottom: 70px;}
+	.profile_info{margin-bottom: 10px;}
 	}
 
 /* 110% Tela 1366 x 768 */
@@ -403,7 +403,7 @@ label #sidebar_btn:hover{
 	.sidebar{width: 240px;}
 	.content{margin-left: 240px;}
 	.sidebar span{font-size: 13px;}
-	.profile_info{margin-bottom: 120px;}
+	.profile_info{margin-bottom: 60px;}
 	}
 
 /* 100% Tela 1366 x 768 */
@@ -412,7 +412,7 @@ label #sidebar_btn:hover{
 	.sidebar{width: 250px;}
 	.content{margin-left: 250px;}
 	.sidebar span{font-size: 14px;}
-	.profile_info{margin-bottom: 160px;}
+	.profile_info{margin-bottom: 110px;}
 	}
 
 /* 90% Tela 1366 x 768 */
@@ -420,7 +420,7 @@ label #sidebar_btn:hover{
 	{
 	.sidebar{width: 260px;}
 	.content{margin-left: 260px;}
-	.sidebar span{font-size: 16px;}
+	.sidebar span{font-size: 15px;}
 	}
 
 /* 80% Tela 1366 x 768 */
@@ -428,6 +428,6 @@ label #sidebar_btn:hover{
 	{
 	.sidebar{width: 280px;}
 	.content{margin-left: 280px;}
-	.sidebar span{font-size: 20px;}
+	.sidebar span{font-size: 16px;}
 	}
 /* Fim Media queries */
