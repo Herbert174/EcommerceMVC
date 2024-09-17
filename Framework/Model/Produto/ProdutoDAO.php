@@ -100,7 +100,7 @@
         
             if($nome_produto && $resumo && empty($_FILES['imagem']['name']))
                 {
-                $sql = " UPDATE produtos SET nome_produto = '$nome_produto', resumo = '$resumo', qntd_estoque = '$qntd_estoque', preco = '$preco', cumprimento = '$cumprimento', altura = '$altura', largura = '$largura', peso = '$peso', secao = '$secao', info_tec = '$info_tec', garantia = '$garantia', embalagem = '$embalagem' WHERE id_produto = '$IdProduto' ";
+                $sql = " UPDATE produtos SET nome_produto = '$nome_produto', resumo = '$resumo', qntd_estoque = '$qntd_estoque', preco = '$preco', cumprimento = '$cumprimento', altura = '$altura', largura = '$largura', peso = '$peso', secao = '$categoria', info_tec = '$info_tec', garantia = '$garantia', embalagem = '$embalagem' WHERE id_produto = '$IdProduto' ";
                 if($resultado_id = mysqli_query($link, $sql))
                     {
                     return true;
@@ -108,7 +108,7 @@
                 }else{
                         if($nome_produto && $resumo && !empty($_FILES['imagem']['name']))
                             {
-                            $sql = " UPDATE produtos SET nome_produto = '$nome_produto', resumo = '$resumo', qntd_estoque = '$qntd_estoque', preco = '$preco', cumprimento = '$cumprimento', altura = '$altura', largura = '$largura', peso = '$peso', secao = '$secao', info_tec = '$info_tec', garantia = '$garantia', embalagem = '$embalagem', imagem = '$path', nome_imagem = '$nomeImagem' WHERE id_produto = '$IdProduto' ";
+                            $sql = " UPDATE produtos SET nome_produto = '$nome_produto', resumo = '$resumo', qntd_estoque = '$qntd_estoque', preco = '$preco', cumprimento = '$cumprimento', altura = '$altura', largura = '$largura', peso = '$peso', secao = '$categoria', info_tec = '$info_tec', garantia = '$garantia', embalagem = '$embalagem', imagem = '$path', nome_imagem = '$nomeImagem' WHERE id_produto = '$IdProduto' ";
                             if($resultado_id = mysqli_query($link, $sql))
                                 {
                                 return true;
