@@ -116,8 +116,7 @@
 								<th scope="col">Ações</th>
 							</tr>
 						</thead>
-						<tbody><!-- Area onde é exibido os produtos já cadastrados no banco de dados -->
-							<?php echo $Produto->ExibirTodosProdutoController() ?>
+						<tbody id="Produtos"><!-- Area onde é exibido os produtos já cadastrados no banco de dados -->
 						</tbody>
 					</table>
 				</div>
@@ -127,27 +126,39 @@
 		<script type="text/javascript">
 			$(document).ready(function()
 				{
-				$('.btn_apagar').click( function()
+				function AtualizaProdutos()
 					{
-					var id_produto = $(this).data('id_produto');
-					var Controller = 'Produto';
-					var Action = 'ExcluirProdutoController';
-
-					if(confirm('Esta ação apagará o produto em definitivo!'))
-						{
-						$.ajax({
-							url: 'crud.php',
-							method: 'get',
-							data: {id_produto: id_produto,
-								Controller: Controller,
-								Action: Action,
-							},
-							success: function(data)
+					$.ajax({
+						url: 'Controller?Controller=Produto&Action=ExibirTodosProdutoController',
+						success: function(data)
+							{
+							$('#Produtos').html(data);
+							$('.btn_apagar').click( function()
 								{
-								}
-							})
-						}
-					});
+								var id_produto = $(this).data('id_produto');
+								var Controller = 'Produto';
+								var Action = 'ExcluirProdutoController';
+
+								if(confirm('Esta ação apagará o produto em definitivo!'))
+									{
+									$.ajax({
+										url: 'crud.php',
+										method: 'get',
+										data: {id_produto: id_produto,
+											Controller: Controller,
+											Action: Action,
+										},
+										success: function(data)
+											{
+											AtualizaProdutos();
+											}
+										})
+									}
+								});
+							}
+						});
+					}
+				AtualizaProdutos();
 				});
 		</script>
 	</body>

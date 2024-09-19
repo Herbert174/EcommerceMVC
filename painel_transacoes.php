@@ -49,12 +49,12 @@
                     {
                     //alert('O cancelamento foi solicitado com sucesso!');
                     $.ajax({
-                            url: 'cancelar_transacao?id='+id,
-                            success: function(data)
-                                {
-                                alert('O cancelamento foi solicitado com sucesso!');
-                                }
-                          });
+                        url: 'cancelar_transacao?id='+id,
+                        success: function(data)
+                            {
+                            alert('O cancelamento foi solicitado com sucesso!');
+                            }
+                        });
                     }
                 }
                 

@@ -165,6 +165,7 @@
                                 },
                                 success: function(data)
                                     {
+                                    window.location.href = "painel_comentarios.php";
                                     }
                             });
                         }
