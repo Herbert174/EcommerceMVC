@@ -50,6 +50,69 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+	<script type="text/javascript">
+		function VerificaImagens(value)
+			{
+			var fileImagem = document.getElementById("fileImage");
+			if(value != 1)
+				{
+				fileImagem.multiple = "multiple";
+				}else fileImagem.multiple = "";
+			}
+
+		function VerificaTamanho(value)
+			{
+			var inputTamanho1 = document.getElementById("Tamanho1");
+			var inputTamanho2 = document.getElementById("Tamanho2");
+			var inputTamanho3 = document.getElementById("Tamanho3");
+			var inputTamanho4 = document.getElementById("Tamanho4");
+			
+			if(value == "Sim")
+				{
+				inputTamanho1.disabled = false;
+				inputTamanho2.disabled = false;
+				inputTamanho3.disabled = false;
+				inputTamanho4.disabled = false;
+				}else 
+					{
+					inputTamanho1.disabled = true;
+					inputTamanho2.disabled = true;
+					inputTamanho3.disabled = true;
+					inputTamanho4.disabled = true;
+					inputTamanho1.value = null;
+					inputTamanho2.value = null;
+					inputTamanho3.value = null;
+					inputTamanho4.value = null;
+					}
+			}
+
+		function VerificaCor(value)
+			{
+			var inputCor1 = document.getElementById("Cor1");
+			var inputCor2 = document.getElementById("Cor2");
+			var inputCor3 = document.getElementById("Cor3");
+			var inputCor4 = document.getElementById("Cor4");
+			
+			if(value == "Sim")
+				{
+				inputCor1.disabled = false;
+				inputCor2.disabled = false;
+				inputCor3.disabled = false;
+				inputCor4.disabled = false;
+				}else 
+					{
+					inputCor1.disabled = true;
+					inputCor2.disabled = true;
+					inputCor3.disabled = true;
+					inputCor4.disabled = true;
+					inputCor1.value = null;
+					inputCor2.value = null;
+					inputCor3.value = null;
+					inputCor4.value = null;
+					}
+			}
+	</script>
   </head>
 
   <body>
@@ -111,13 +174,25 @@
 					</label><br>
 				</div>
 				<div class="form-group">
-					<label for="">
-						Selecione a imagem
+				<label>Quantas imagens são exibidas?</label><br>
+					<select class="form-control formulario_custom1" name="qntd_img" onchange="VerificaImagens(this.value)">
+						<option value="1"<?php if($dados_id['qntd_img'] == 1)echo'selected';?>>1</option>
+		                <option value="2"<?php if($dados_id['qntd_img'] == 2)echo'selected';?>>2</option>
+		                <option value="3"<?php if($dados_id['qntd_img'] == 3)echo'selected';?>>3</option>
+		                <option value="4"<?php if($dados_id['qntd_img'] == 4)echo'selected';?>>4</option>
+		                <option value="5"<?php if($dados_id['qntd_img'] == 5)echo'selected';?>>5</option>
+		                <option value="6"<?php if($dados_id['qntd_img'] == 6)echo'selected';?>>6</option>
+	            	</select>
+				</div>
+				<div class="form-group">
+					<label>
+						Imagens: <br>(Selecione todas as imagens do produto ao enviar caso sejam mais de uma)
 					</label><br>
 					<a target="_blank" href="<?=$dados_id['imagem'];?>">
 						<img height="50" width="50" src="<?=$dados_id['imagem']?>">
 					</a><br><br>
-					<input type="file" class="form-control formulario_custom1" name="imagem">
+					<input type="hidden" name="MAX_FILE_SIZE" value="99999999" /><!-- Tamanho max. permitido -->
+					<input id="fileImage" type="file" name="imagem[]" class="form-control formulario_custom1"/><!-- Ferramenta de busca necessária para selecionar imagem -->
 				</div>
 				<div class="form-group">
 					<label>
@@ -141,6 +216,68 @@
 					<label>
 						Embalagem:<br>
 						<textarea id="embalagem" name="embalagem" rows="3" cols="40"><?= $dados_id['embalagem']; ?></textarea>
+					</label>
+				</div>
+				<div class="form-group">
+				<label>O produto possui diferentes tamanhos?</label><br>
+					<select class="form-control formulario_custom1" name="dif_tam" onchange="VerificaTamanho(this.value)">
+						<option value="Nao"<?php if($dados_id['dif_tam'] == 'Nao')echo'selected';?>>Não</option>
+						<option value="Sim"<?php if($dados_id['dif_tam'] == 'Sim')echo'selected';?>>Sim</option>
+	            	</select>
+				</div>
+				<div class="form-group">
+					<label>
+						Tamanho 1:<br>
+						<input type="number" name="Tamanho1" value="<?= $dados_id['Tamanho1']; ?>" class="form-control" id="Tamanho1" <?php if($dados_id['dif_tam'] == 'Nao')echo'disabled'?>>
+					</label>
+				</div>
+				<div class="form-group">
+					<label>
+						Tamanho 2:<br>
+						<input type="number" name="Tamanho2" value="<?= $dados_id['Tamanho2']; ?>" class="form-control" id="Tamanho2" <?php if($dados_id['dif_tam'] == 'Nao')echo'disabled'?>>
+					</label>
+				</div>
+				<div class="form-group">
+					<label>
+						Tamanho 3:<br>
+						<input type="number" name="Tamanho3" value="<?= $dados_id['Tamanho3']; ?>" class="form-control" id="Tamanho3" <?php if($dados_id['dif_tam'] == 'Nao')echo'disabled'?>>
+					</label>
+				</div>
+				<div class="form-group">
+					<label>
+						Tamanho 4:<br>
+						<input type="number" name="Tamanho4" value="<?= $dados_id['Tamanho4']; ?>" class="form-control" id="Tamanho4" <?php if($dados_id['dif_tam'] == 'Nao')echo'disabled'?>>
+					</label>
+				</div>
+				<div class="form-group">
+				<label>O produto possui diferentes cores?</label><br>
+					<select class="form-control formulario_custom1" name="dif_cor" onchange="VerificaCor(this.value)">
+						<option value="Nao"<?php if($dados_id['dif_cor'] == 'Nao')echo'selected';?>>Não</option>
+						<option value="Sim"<?php if($dados_id['dif_cor'] == 'Sim')echo'selected';?>>Sim</option>
+	            	</select>
+				</div>
+				<div class="form-group">
+					<label>
+						Cor 1:<br>
+						<input type="text" name="Cor1" placeholder="Preto" class="form-control" id="Cor1" value="<?= $dados_id['Cor1']; ?>" <?php if($dados_id['dif_cor'] == 'Nao')echo'disabled'?>>
+					</label>
+				</div>
+				<div class="form-group">
+					<label>
+						Cor 2:<br>
+						<input type="text" name="Cor2" placeholder="Branco" class="form-control" id="Cor2" value="<?= $dados_id['Cor2']; ?>" <?php if($dados_id['dif_cor'] == 'Nao')echo'disabled'?>>
+					</label>
+				</div>
+				<div class="form-group">
+					<label>
+						Cor 3:<br>
+						<input type="text" name="Cor3" placeholder="Vermelho" class="form-control" id="Cor3" value="<?= $dados_id['Cor3']; ?>" <?php if($dados_id['dif_cor'] == 'Nao')echo'disabled'?>>
+					</label>
+				</div>
+				<div class="form-group">
+					<label>
+						Cor 4:<br>
+						<input type="text" name="Cor4" placeholder="Azul" class="form-control" id="Cor4" value="<?= $dados_id['Cor4']; ?>" <?php if($dados_id['dif_cor'] == 'Nao')echo'disabled'?>>
 					</label>
 				</div>
 				

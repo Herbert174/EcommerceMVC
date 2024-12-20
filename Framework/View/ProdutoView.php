@@ -36,16 +36,72 @@
                 $cinco_estrelas = 'ativo';
                 }
 
+            
+
             $retorno = '<div class="container borda1">';
             $retorno .= '<div class="row">';
             $retorno .= '<div class="col-md-6">';
             $retorno .= '<div class="img-produto">';
-            $retorno .= '<img id="zoom_01" class="img-responsive img-custom2" src="'.$produto['imagem'].'"></div></div>';
-            $retorno .= '<div class="col-md-6">';           
+            $retorno .= '<img class="img-ativo img-responsive img-custom2" id="img_Produto" src="'.$produto['imagem'].'" data-zoom-image="'.$produto['imagem'].'"/>';
+
+            if(isset($produto['qntd_img']))
+                {
+                if($produto['qntd_img'] != 1)
+                    {
+                    $retorno .= '<div id="gal1">';
+                    if($produto['qntd_img'] == 2)
+                        {
+                        $retorno .= '<a href="#" data-image="'.$produto['imagem'].'" data-zoom-image="'.$produto['imagem'].'"> <img class="img-produtoLoja" id="img_Produto" src="'.$produto['imagem'].'"/></a>';
+                        $retorno .= '<a href="#" data-image="'.$produto['imagem2'].'" data-zoom-image="'.$produto['imagem2'].'"> <img class="img-produtoLoja" id="img_Produto" src="'.$produto['imagem2'].'"/></a>';
+                        }else
+                            {
+                            if($produto['qntd_img'] == 3)
+                                {
+                                $retorno .= '<a href="#" data-image="'.$produto['imagem'].'" data-zoom-image="'.$produto['imagem'].'"> <img class="img-produtoLoja" id="img_Produto" src="'.$produto['imagem'].'"/></a>';
+                                $retorno .= '<a href="#" data-image="'.$produto['imagem2'].'" data-zoom-image="'.$produto['imagem2'].'"> <img class="img-produtoLoja" id="img_Produto" src="'.$produto['imagem2'].'"/></a>';
+                                $retorno .= '<a href="#" data-image="'.$produto['imagem3'].'" data-zoom-image="'.$produto['imagem3'].'"> <img class="img-produtoLoja" id="img_Produto" src="'.$produto['imagem3'].'"/></a>';
+                                }else
+                                    {
+                                    if($produto['qntd_img'] == 4)
+                                        {
+                                        $retorno .= '<a href="#" data-image="'.$produto['imagem'].'" data-zoom-image="'.$produto['imagem'].'"> <img class="img-produtoLoja" id="img_Produto" src="'.$produto['imagem'].'"/></a>';
+                                        $retorno .= '<a href="#" data-image="'.$produto['imagem2'].'" data-zoom-image="'.$produto['imagem2'].'"> <img class="img-produtoLoja" id="img_Produto" src="'.$produto['imagem2'].'"/></a>';
+                                        $retorno .= '<a href="#" data-image="'.$produto['imagem3'].'" data-zoom-image="'.$produto['imagem3'].'"> <img class="img-produtoLoja" id="img_Produto" src="'.$produto['imagem3'].'"/></a>';
+                                        $retorno .= '<a href="#" data-image="'.$produto['imagem4'].'" data-zoom-image="'.$produto['imagem4'].'"> <img class="img-produtoLoja" id="img_Produto" src="'.$produto['imagem4'].'"/></a>';
+                                        }else
+                                            {
+                                            if($produto['qntd_img'] == 5)
+                                                {
+                                                $retorno .= '<a href="#" data-image="'.$produto['imagem'].'" data-zoom-image="'.$produto['imagem'].'"> <img class="img-produtoLoja" id="img_Produto" src="'.$produto['imagem'].'"/></a>';
+                                                $retorno .= '<a href="#" data-image="'.$produto['imagem2'].'" data-zoom-image="'.$produto['imagem2'].'"> <img class="img-produtoLoja" id="img_Produto" src="'.$produto['imagem2'].'"/></a>';
+                                                $retorno .= '<a href="#" data-image="'.$produto['imagem3'].'" data-zoom-image="'.$produto['imagem3'].'"> <img class="img-produtoLoja" id="img_Produto" src="'.$produto['imagem3'].'"/></a>';
+                                                $retorno .= '<a href="#" data-image="'.$produto['imagem4'].'" data-zoom-image="'.$produto['imagem4'].'"> <img class="img-produtoLoja" id="img_Produto" src="'.$produto['imagem4'].'"/></a>';
+                                                $retorno .= '<a href="#" data-image="'.$produto['imagem5'].'" data-zoom-image="'.$produto['imagem5'].'"> <img class="img-produtoLoja" id="img_Produto" src="'.$produto['imagem5'].'"/></a>';
+                                                }else
+                                                    {
+                                                    if($produto['qntd_img'] == 6)
+                                                        {
+                                                        $retorno .= '<a href="#" data-image="'.$produto['imagem'].'" data-zoom-image="'.$produto['imagem'].'"> <img class="img-produtoLoja" id="img_Produto" src="'.$produto['imagem'].'"/></a>';
+                                                        $retorno .= '<a href="#" data-image="'.$produto['imagem2'].'" data-zoom-image="'.$produto['imagem2'].'"> <img class="img-produtoLoja" id="img_Produto" src="'.$produto['imagem2'].'"/></a>';
+                                                        $retorno .= '<a href="#" data-image="'.$produto['imagem3'].'" data-zoom-image="'.$produto['imagem3'].'"> <img class="img-produtoLoja" id="img_Produto" src="'.$produto['imagem3'].'"/></a>';
+                                                        $retorno .= '<a href="#" data-image="'.$produto['imagem4'].'" data-zoom-image="'.$produto['imagem4'].'"> <img class="img-produtoLoja" id="img_Produto" src="'.$produto['imagem4'].'"/></a>';
+                                                        $retorno .= '<a href="#" data-image="'.$produto['imagem5'].'" data-zoom-image="'.$produto['imagem5'].'"> <img class="img-produtoLoja" id="img_Produto" src="'.$produto['imagem5'].'"/></a>';
+                                                        $retorno .= '<a href="#" data-image="'.$produto['imagem6'].'" data-zoom-image="'.$produto['imagem6'].'"> <img class="img-produtoLoja" id="img_Produto" src="'.$produto['imagem6'].'"/></a>';
+                                                        }
+                                                    }
+                                            }
+                                    }
+                            }
+                    $retorno .= '</div>';
+                    }
+                }
+            $retorno .= '</div></div>';
+            //$retorno .= '<img id="zoom_01" class="img-responsive img-custom2" src="'.$produto['imagem'].'"></div></div>';
+            
+            $retorno .= '<div class="col-md-6 infoProd">';           
             $retorno .= '<div class="col-md-12">';
             $retorno .= '<h2>R$ '.$preco.'</h2>';
             $retorno .= '<p>Pagamento a vista ou parcelado</p>';
-            $retorno .= '<p>Variedade na escolha do frete</p>'; 
             $retorno .= '<p>Quantidade no estoque: '.$produto['qntd_estoque'].'un.</p>';
             $retorno .= '<button class="btn btn-lg btn-custom1" id="comprar">Comprar</button>';
             $retorno .= '<h3>Avalie</h3>';

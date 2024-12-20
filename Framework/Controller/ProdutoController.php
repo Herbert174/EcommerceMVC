@@ -24,6 +24,19 @@
             $info_tec = $_POST['info_tec'];
             $garantia = $_POST['garantia'];
             $embalagem = $_POST['embalagem'];
+            $qntd_img = $_POST['qntd_img'];
+            $dif_tam = $_POST['dif_tam'];
+            $dif_cor = $_POST['dif_cor'];
+            $tamanho1 = $_POST['Tamanho1'];
+            $tamanho2 = $_POST['Tamanho2'];
+            $tamanho3 = $_POST['Tamanho3'];
+            $tamanho4 = $_POST['Tamanho4'];
+            $cor1 = $_POST['Cor1'];
+            $cor2 = $_POST['Cor2'];
+            $cor3 = $_POST['Cor3'];
+            $cor4 = $_POST['Cor4'];
+            $dif_tam = $_POST['dif_tam'];
+            $dif_cor = $_POST['dif_cor'];
 
             $VO->defineNomeProduto($nome_produto);
             $VO->defineResumo($resumo);
@@ -37,6 +50,17 @@
             $VO->defineInfoTec($info_tec);
             $VO->defineGarantia($garantia);
             $VO->defineEmbalagem($embalagem);
+            $VO->defineQntdImg($qntd_img);
+            $VO->defineTamanho1($tamanho1);
+            $VO->defineTamanho2($tamanho2);
+            $VO->defineTamanho3($tamanho3);
+            $VO->defineTamanho4($tamanho4);
+            $VO->defineCor1($cor1);
+            $VO->defineCor2($cor2);
+            $VO->defineCor3($cor3);
+            $VO->defineCor4($cor4);
+            $VO->defineDifTam($dif_tam);
+            $VO->defineDifCor($dif_cor);
 
             if($RetornoModel = $Model->CadastrarProdutoModel($VO))
                 {
@@ -62,7 +86,35 @@
             $info_tec = $_POST['info_tec'];
             $garantia = $_POST['garantia'];
             $embalagem = $_POST['embalagem'];
-
+            $qntd_img = $_POST['qntd_img'];
+            $dif_tam = $_POST['dif_tam'];
+            $dif_cor = $_POST['dif_cor'];
+            if($dif_tam == 'Sim')
+                {
+                $tamanho1 = isset($_POST['Tamanho1']) ? $_POST['Tamanho1'] : NULL;
+                $tamanho2 = isset($_POST['Tamanho2']) ? $_POST['Tamanho2'] : NULL;
+                $tamanho3 = isset($_POST['Tamanho3']) ? $_POST['Tamanho3'] : NULL;
+                $tamanho4 = isset($_POST['Tamanho4']) ? $_POST['Tamanho4'] : NULL;
+                }else
+                    {
+                    $tamanho1 = NULL;
+                    $tamanho2 = NULL;
+                    $tamanho3 = NULL;
+                    $tamanho4 = NULL;
+                    }
+            if($dif_cor == 'Sim')
+                {
+                $cor1 = isset($_POST['Cor1']) ? $_POST['Cor1'] : NULL;
+                $cor2 = isset($_POST['Cor2']) ? $_POST['Cor2'] : NULL;
+                $cor3 = isset($_POST['Cor3']) ? $_POST['Cor3'] : NULL;
+                $cor4 = isset($_POST['Cor4']) ? $_POST['Cor4'] : NULL;
+                }else
+                    {
+                    $cor1 = NULL;
+                    $cor2 = NULL;
+                    $cor3 = NULL;
+                    $cor4 = NULL;
+                    }
             $VO->defineIdProduto($IdProduto);
             $VO->defineNomeProduto($nome_produto);
             $VO->defineResumo($resumo);
@@ -76,6 +128,17 @@
             $VO->defineInfoTec($info_tec);
             $VO->defineGarantia($garantia);
             $VO->defineEmbalagem($embalagem);
+            $VO->defineQntdImg($qntd_img);
+            $VO->defineTamanho1($tamanho1);
+            $VO->defineTamanho2($tamanho2);
+            $VO->defineTamanho3($tamanho3);
+            $VO->defineTamanho4($tamanho4);
+            $VO->defineCor1($cor1);
+            $VO->defineCor2($cor2);
+            $VO->defineCor3($cor3);
+            $VO->defineCor4($cor4);
+            $VO->defineDifTam($dif_tam);
+            $VO->defineDifCor($dif_cor);
 
             if($RetornoModel = $Model->EditarProdutoModel($VO))
                 {
@@ -253,9 +316,20 @@
 
             $IdProduto = $_GET['produto_id'];
             $Qntd = $_POST['qntd'];
+            //$Tamanho = isset($_POST['tamanho']) ? $_POST['tamanho'] : NULL;
+            $Tamanho = $_POST['tamanho'];
+            $Cor = $_POST['cor'];
+
+            if(!isset($_SESSION['id_usuario']))
+                {
+                header("Location: pagina_produto?produto=$IdProduto");
+                }
 
             $VO->defineIdProduto($IdProduto);
             $VO->defineQntdEstoque($Qntd);
+            $VO->defineTamanhoEscolhido($Tamanho);
+            $VO->defineCorEscolhido($Cor);
+            //Adicionar Cor e tamanho do produto quando houver
             if($Model->AdicionarProdutoCarrinhoModel($VO))
                 {
                 header("Location: pagina_produto?produto=$IdProduto");

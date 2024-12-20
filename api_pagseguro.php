@@ -60,6 +60,8 @@
             {
             $produto_id   = $produto['id_produto'];
             $produto_qntd = $produto['qntd_produto'];
+            $produto_cor  = isset($produto['cor']) ? $produto['cor'] : null;
+            $produto_tamanho = isset($produto['tamanho']) ? $produto['tamanho'] : null;
 
             $JsonId = json_encode($produto_id);
             $JsonQntd = json_encode($produto_qntd);
@@ -79,7 +81,8 @@
                     $JsonPreco = json_encode($preco_produto);
                     }
                 $paymentRequest->addItem($produto_id, $nome_produto, $produto_qntd, $preco_produto);
-                $lista_produtos .= "Nome: $nome_produto <br> Qntd: $produto_qntd <br> Preco unitário: $preco_produto <br><br>";
+                //Adicionar Opção de tamanho e cor escolhido pelo cliente
+                $lista_produtos .= "Nome: $nome_produto <br> Qntd: $produto_qntd <br> Preco unitário: $preco_produto <br> Tamanho: $produto_tamanho <br> Cor: $produto_cor <br><br>";
                 /*$produto = array(
                     "reference_id" => $JsonId,
                     "name" => $JsonNome,

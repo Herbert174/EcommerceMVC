@@ -5,7 +5,8 @@
     include_once "Framework/Controller/EcommerceController.php";
 
     $Produto = new ProdutoController();
-    $Produto->RecuperarProdutoController();
+    $produto = $Produto->RecuperarProdutoController();
+
 
     $Comentario = new ComentarioController();
 
@@ -59,7 +60,7 @@
 
         <!-- Jquery -->
         <script src="jquery-3.6.0.js"></script>
-        <script src='jquery.elevatezoom.js'></script>
+        <!--<script src='jquery.elevatezoom.js'></script> -->
 
         <style type="text/css">
 	    	
@@ -255,6 +256,25 @@
                                 <br>
                                 <span class="negrito">Quantidade: </span>
                                 <input class="input-custom" type="number" id="numero" name="qntd" min="1" max="10" step="1"><br><br>
+                                <!-- Acrescentar Opção de cor e tamanho para produtos com essa opção -->
+                                <?php if($produto['dif_tam'] == 'Sim') { ?>
+                                <span class="negrito">Tamanho: </span>
+                                <select class="form-control formulario_custom1" name="tamanho">
+                                    <option value="<?php echo $produto['Tamanho1']?>"><?php echo $produto['Tamanho1']?></option>
+                                    <option value="<?php echo $produto['Tamanho2']?>"><?php echo $produto['Tamanho2']?></option>
+                                    <option value="<?php echo $produto['Tamanho3']?>"><?php echo $produto['Tamanho3']?></option>
+                                    <option value="<?php echo $produto['Tamanho4']?>"><?php echo $produto['Tamanho4']?></option>
+                                </select><br>
+                                <?php } ?>
+                                <?php if($produto['dif_cor'] == 'Sim') { ?>
+                                <span class="negrito">Cor: </span>
+                                <select class="form-control formulario_custom1" name="cor">
+                                    <option value="<?php echo $produto['Cor1']?>"><?php echo $produto['Cor1']?></option>
+                                    <option value="<?php echo $produto['Cor2']?>"><?php echo $produto['Cor2']?></option>
+                                    <option value="<?php echo $produto['Cor3']?>"><?php echo $produto['Cor3']?></option>
+                                    <option value="<?php echo $produto['Cor4']?>"><?php echo $produto['Cor4']?></option>
+                                </select><br>
+                                <?php } ?>
                                 <input type="submit" class="btn btn-success" name="" value="Adicionar ao carrinho">
                             </form>
                         </div>
@@ -377,19 +397,38 @@
             </div>
         </footer>
 
+        <!-- ElevateJoom -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.6/src/jquery.ez-plus.js"></script>
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
+
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+
         <script>
-            $('#zoom_01').elevateZoom({
+            /*$('#zoom_01').elevateZoom({
             zoomType: "inner",
             cursor: "crosshair",
             zoomWindowFadeIn: 500,
             zoomWindowFadeOut: 750
+            });*/
+
+            //initiate the plugin and pass the id of the div containing gallery images
+            $('#img_Produto').ezPlus({
+                gallery: 'gal1', cursor: 'pointer', galleryActiveClass: 'active',
+                imageCrossfade: true, loadingIcon: 'http://www.elevateweb.co.uk/spinner.gif'
+            });
+
+            //pass the images to Fancybox
+            $('#img_Produto').bind('click', function (e) {
+                var ez = $('#img_Produto').data('ezPlus');
+                $.fancyboxPlus(ez.getGalleryList());
+                return false;
             });
         </script>
 
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="bootstrap/js/bootstrap.min.js"></script>
+        
     </body>
 </html>

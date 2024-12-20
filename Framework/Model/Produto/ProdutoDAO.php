@@ -16,32 +16,77 @@
             $info_tec = $Produto->retornaInfoTec();
             $garantia = $Produto->retornaGarantia();
             $embalagem = $Produto->retornaEmbalagem();
-        
-            if(isset($_FILES['imagem']))//Verifica se algo foi enviado para imagem através de FILES
+            $qntd_img = $Produto->retornaQntdImg();
+            $tamanho1 = $Produto->retornaTamanho1();
+            $tamanho2 = $Produto->retornaTamanho2();
+            $tamanho3 = $Produto->retornaTamanho3();
+            $tamanho4 = $Produto->retornaTamanho4();
+            $cor1 = $Produto->retornaCor1();
+            $cor2 = $Produto->retornaCor2();
+            $cor3 = $Produto->retornaCor3();
+            $cor4 = $Produto->retornaCor4();
+            $diftam = $Produto->retornaDifTam();
+            $difcor = $Produto->retornaDifCor();
+
+            $imagens = [];
+
+            if(isset($_FILES['imagem']))
                 {
-                $imagem = $_FILES['imagem'];//Guarda o arquivo em $imagem
+                $imagem = $_FILES['imagem'];
+                for($img = 0; $img < count($imagem['name']); $img++)
+                    {
+                    if($imagem['error'][$img])//Caso o arquivo esteja corrompido, para o codigo e retorna a mensagem de erro
+                        die("Falha ao enviar imagem");
         
-                if($imagem['error'])//Caso o arquivo esteja corrompido, para o codigo e retorna a mensagem de erro
-                    die("Falha ao enviar imagem");
-        
-                if($imagem['size'] > 4194304)//Verifica se o tamanho da imagem excede o tamanho maximo, 4MB
-                    die("Arquivo excedeu o tamanho limite!! Max: 4MB");
-        
-                $pasta = "imagens/";//Define em $pasta o local onde a imagem será armazenada
-                $nomeImagem = $imagem['name'];//Armazena o nome original do arquivo
-                $novoNomeImagem = uniqid();//Gera um id unico para que os nomes das imagens não se repitam
-                $extensao = strtolower(pathinfo($nomeImagem,PATHINFO_EXTENSION));//Retorna somente o nome da extensão da imagem/arquivo, transformando ele em minusculo se for preciso com a função strtolower
-                
-                if($extensao != "jpg" && $extensao != "png")//Verifica se a extensão enviada é jpg ou png
-                    die("Formato de arquivo não aceito");
-        
-                $path = $pasta.$novoNomeImagem.".".$extensao;//Define o local onde a imagem será armazenada e o nome que será salvo
-        
-                $deu_certo = move_uploaded_file($imagem['tmp_name'], $path);//Move o arquivo selecionado para a pasta de imagens/arquivo do servidor
+                    if($imagem['size'][$img] > 4194304)//Verifica se o tamanho da imagem excede o tamanho maximo, 4MB
+                        die("Arquivo excedeu o tamanho limite!! Max: 4MB");
+            
+                    $pasta = "imagens/";//Define em $pasta o local onde a imagem será armazenada
+                    $nomeImagem = $imagem['name'][$img];//Armazena o nome original do arquivo
+                    $novoNomeImagem = uniqid();//Gera um id unico para que os nomes das imagens não se repitam
+                    $extensao = strtolower(pathinfo($nomeImagem,PATHINFO_EXTENSION));//Retorna somente o nome da extensão da imagem/arquivo, transformando ele em minusculo se for preciso com a função strtolower
+                    
+                    if($extensao != "jpg" && $extensao != "png")//Verifica se a extensão enviada é jpg ou png
+                        die("Formato de arquivo não aceito");
+            
+                    $path = $pasta.$novoNomeImagem.".".$extensao;//Define o local onde a imagem será armazenada e o nome que será salvo
+                    if($img == 0)
+                        {
+                        $img1 = $path;
+                        }
+                        else{
+                            if($img == 1)
+                                {
+                                $img2 = $path;
+                                }else{
+                                    if($img == 2)
+                                        {
+                                        $img3 = $path;
+                                        }else{
+                                            if($img == 3)
+                                                {
+                                                $img4 = $path;
+                                                }else{
+                                                    if($img == 4)
+                                                        {
+                                                        $img5 = $path;
+                                                        }else{
+                                                            if($img == 5)
+                                                                {
+                                                                $img6 = $path;  
+                                                                }
+                                                            }
+                                                    }
+                                            }
+                                    }
+                            }
+
+                    $deu_certo = move_uploaded_file($imagem['tmp_name'][$img], $path);//Move o arquivo selecionado para a pasta de imagens/arquivo do servidor   
+                    }
                 }
         
-            $sql = " INSERT INTO produtos(nome_produto, resumo, qntd_estoque, preco, cumprimento, altura, largura, peso, secao, info_tec, garantia, embalagem, imagem, nome_imagem) 
-                        values('$nome_produto', '$resumo', '$qntd_estoque', '$preco', '$comprimento', '$altura', '$largura', '$peso', '$secao', '$info_tec', '$garantia', '$embalagem', '$path', '$nomeImagem') ";
+            $sql = " INSERT INTO produtos(nome_produto, resumo, qntd_estoque, preco, cumprimento, altura, largura, peso, secao, info_tec, garantia, embalagem, imagem, nome_imagem, imagem2, imagem3, imagem4, imagem5, imagem6, Tamanho1, Tamanho2, Tamanho3, Tamanho4, Cor1, Cor2, Cor3, Cor4, qntd_img, dif_tam, dif_cor) 
+                        values('$nome_produto', '$resumo', '$qntd_estoque', '$preco', '$comprimento', '$altura', '$largura', '$peso', '$categoria', '$info_tec', '$garantia', '$embalagem', '$img1', '$nomeImagem', '$img2', '$img3', '$img4', '$img5', '$img6', '$tamanho1', '$tamanho2', '$tamanho3', '$tamanho4', '$cor1', '$cor2', '$cor3', '$cor4', '$qntd_img', '$diftam', '$difcor') ";
             //Armazena em $sql o codigo que será enviado ao banco de dados
         
             $objDb = new database();
@@ -71,16 +116,82 @@
             $info_tec = $Produto->retornaInfoTec();
             $garantia = $Produto->retornaGarantia();
             $embalagem = $Produto->retornaEmbalagem();
+            $qntd_img = $Produto->retornaQntdImg();
+            $tamanho1 = $Produto->retornaTamanho1();
+            $tamanho2 = $Produto->retornaTamanho2();
+            $tamanho3 = $Produto->retornaTamanho3();
+            $tamanho4 = $Produto->retornaTamanho4();
+            $cor1 = $Produto->retornaCor1();
+            $cor2 = $Produto->retornaCor2();
+            $cor3 = $Produto->retornaCor3();
+            $cor4 = $Produto->retornaCor4();
+            $diftam = $Produto->retornaDifTam();
+            $difcor = $Produto->retornaDifCor();
+
+            if(!empty($_FILES['imagem']['name'][0]))
+                {
+                $imagem = $_FILES['imagem'];
+                for($img = 0; $img < count($imagem['name']); $img++)
+                    {
+                    if($imagem['error'][$img])//Caso o arquivo esteja corrompido, para o codigo e retorna a mensagem de erro
+                        die("Falha ao enviar imagem");
         
-            if(!empty($_FILES['imagem']['name']))
+                    if($imagem['size'][$img] > 4194304)//Verifica se o tamanho da imagem excede o tamanho maximo, 4MB
+                        die("Arquivo excedeu o tamanho limite!! Max: 4MB");
+            
+                    $pasta = "imagens/";//Define em $pasta o local onde a imagem será armazenada
+                    $nomeImagem = $imagem['name'][$img];//Armazena o nome original do arquivo
+                    $novoNomeImagem = uniqid();//Gera um id unico para que os nomes das imagens não se repitam
+                    $extensao = strtolower(pathinfo($nomeImagem,PATHINFO_EXTENSION));//Retorna somente o nome da extensão da imagem/arquivo, transformando ele em minusculo se for preciso com a função strtolower
+                    
+                    if($extensao != "jpg" && $extensao != "png")//Verifica se a extensão enviada é jpg ou png
+                        die("Formato de arquivo não aceito");
+            
+                    $path = $pasta.$novoNomeImagem.".".$extensao;//Define o local onde a imagem será armazenada e o nome que será salvo
+                    if($img == 0)
+                        {
+                        $img1 = $path;
+                        }
+                        else{
+                            if($img == 1)
+                                {
+                                $img2 = $path;
+                                }else{
+                                    if($img == 2)
+                                        {
+                                        $img3 = $path;
+                                        }else{
+                                            if($img == 3)
+                                                {
+                                                $img4 = $path;
+                                                }else{
+                                                    if($img == 4)
+                                                        {
+                                                        $img5 = $path;
+                                                        }else{
+                                                            if($img == 5)
+                                                                {
+                                                                $img6 = $path;  
+                                                                }
+                                                            }
+                                                    }
+                                            }
+                                    }
+                            }
+
+                    $deu_certo = move_uploaded_file($imagem['tmp_name'][$img], $path);//Move o arquivo selecionado para a pasta de imagens/arquivo do servidor   
+                    }
+                }
+        
+            /*if(!empty($_FILES['imagem']['name']))
                 {
                 $imagem = $_FILES['imagem'];
         
                 //if($imagem['error'])
                     //die("Falha ao enviar arquivo");
         
-                if($imagem['size'] > 2097152)
-                    die("Arquivo excedeu o tamanho limite!! Max: 2MB");
+                if($imagem['size'] > 4194304)
+                    die("Arquivo excedeu o tamanho limite!! Max: 4MB");
         
                 $pasta = "imagens/";
                 $nomeImagem = $imagem['name'];//nome original do arquivo
@@ -93,22 +204,55 @@
                 $path = $pasta.$novoNomeImagem.".".$extensao;
         
                 $deu_certo = move_uploaded_file($imagem['tmp_name'], $path);//Move o arquivo selecionado para a pasta de imagens/arquivo do servidor
-                }
+                }*/
 
             $objDb = new database();
             $link = $objDb -> conecta_mysql();
         
-            if($nome_produto && $resumo && empty($_FILES['imagem']['name']))
+            if($nome_produto && $resumo && empty($_FILES['imagem']['name'][0]))
                 {
-                $sql = " UPDATE produtos SET nome_produto = '$nome_produto', resumo = '$resumo', qntd_estoque = '$qntd_estoque', preco = '$preco', cumprimento = '$cumprimento', altura = '$altura', largura = '$largura', peso = '$peso', secao = '$categoria', info_tec = '$info_tec', garantia = '$garantia', embalagem = '$embalagem' WHERE id_produto = '$IdProduto' ";
+                if($diftam == "Sim" && $difcor == "Sim")
+                    {
+                    $sql = " UPDATE produtos SET nome_produto = '$nome_produto', resumo = '$resumo', qntd_estoque = '$qntd_estoque', preco = '$preco', cumprimento = '$cumprimento', altura = '$altura', largura = '$largura', peso = '$peso', secao = '$categoria', info_tec = '$info_tec', garantia = '$garantia', embalagem = '$embalagem', Tamanho1 = '$tamanho1', Tamanho2 = '$tamanho2', Tamanho3 = '$tamanho3', Tamanho4 = '$tamanho4', Cor1 = '$cor1', Cor2 = '$cor2', Cor3 = '$cor3', Cor4 = '$cor4', qntd_img = '$qntd_img', dif_tam = '$diftam', dif_cor = '$difcor' WHERE id_produto = '$IdProduto' ";
+                    }
+                if($diftam == "Sim" && $difcor == "Nao")
+                    {
+                    $sql = " UPDATE produtos SET nome_produto = '$nome_produto', resumo = '$resumo', qntd_estoque = '$qntd_estoque', preco = '$preco', cumprimento = '$cumprimento', altura = '$altura', largura = '$largura', peso = '$peso', secao = '$categoria', info_tec = '$info_tec', garantia = '$garantia', embalagem = '$embalagem', Tamanho1 = '$tamanho1', Tamanho2 = '$tamanho2', Tamanho3 = '$tamanho3', Tamanho4 = '$tamanho4', qntd_img = '$qntd_img', dif_tam = '$diftam', dif_cor = '$difcor' WHERE id_produto = '$IdProduto' ";
+                    }
+                if($diftam == "Nao" && $difcor == "Sim")
+                    {
+                    $sql = " UPDATE produtos SET nome_produto = '$nome_produto', resumo = '$resumo', qntd_estoque = '$qntd_estoque', preco = '$preco', cumprimento = '$cumprimento', altura = '$altura', largura = '$largura', peso = '$peso', secao = '$categoria', info_tec = '$info_tec', garantia = '$garantia', embalagem = '$embalagem', Cor1 = '$cor1', Cor2 = '$cor2', Cor3 = '$cor3', Cor4 = '$cor4', qntd_img = '$qntd_img', dif_tam = '$diftam', dif_cor = '$difcor' WHERE id_produto = '$IdProduto' ";
+                    }
+                if($diftam == "Nao" && $difcor == "Nao")
+                    {
+                    $sql = " UPDATE produtos SET nome_produto = '$nome_produto', resumo = '$resumo', qntd_estoque = '$qntd_estoque', preco = '$preco', cumprimento = '$cumprimento', altura = '$altura', largura = '$largura', peso = '$peso', secao = '$categoria', info_tec = '$info_tec', garantia = '$garantia', embalagem = '$embalagem', qntd_img = '$qntd_img', dif_tam = '$diftam', dif_cor = '$difcor' WHERE id_produto = '$IdProduto' ";
+                    }
+
                 if($resultado_id = mysqli_query($link, $sql))
                     {
                     return true;
                     }else return false;
                 }else{
-                        if($nome_produto && $resumo && !empty($_FILES['imagem']['name']))
+                        if($nome_produto && $resumo && !empty($_FILES['imagem']['name'][0]))
                             {
-                            $sql = " UPDATE produtos SET nome_produto = '$nome_produto', resumo = '$resumo', qntd_estoque = '$qntd_estoque', preco = '$preco', cumprimento = '$cumprimento', altura = '$altura', largura = '$largura', peso = '$peso', secao = '$categoria', info_tec = '$info_tec', garantia = '$garantia', embalagem = '$embalagem', imagem = '$path', nome_imagem = '$nomeImagem' WHERE id_produto = '$IdProduto' ";
+                            if($diftam == "Sim" && $difcor == "Sim")
+                                {
+                                $sql = " UPDATE produtos SET nome_produto = '$nome_produto', resumo = '$resumo', qntd_estoque = '$qntd_estoque', preco = '$preco', cumprimento = '$cumprimento', altura = '$altura', largura = '$largura', peso = '$peso', secao = '$categoria', info_tec = '$info_tec', garantia = '$garantia', embalagem = '$embalagem', imagem = '$img1', nome_imagem = '$nomeImagem', imagem2 = '$img2', imagem3 = '$img3', imagem4 = '$img4', imagem5 = '$img5', imagem6 = '$img6', Tamanho1 = '$tamanho1', Tamanho2 = '$tamanho2', Tamanho3 = '$tamanho3', Tamanho4 = '$tamanho4', Cor1 = '$cor1', Cor2 = '$cor2', Cor3 = '$cor3', Cor4 = '$cor4', qntd_img = '$qntd_img', dif_tam = '$diftam', dif_cor = '$difcor' WHERE id_produto = '$IdProduto' ";
+                                }
+                            if($diftam == "Sim" && $difcor == "Nao")
+                                {
+                                $sql = " UPDATE produtos SET nome_produto = '$nome_produto', resumo = '$resumo', qntd_estoque = '$qntd_estoque', preco = '$preco', cumprimento = '$cumprimento', altura = '$altura', largura = '$largura', peso = '$peso', secao = '$categoria', info_tec = '$info_tec', garantia = '$garantia', embalagem = '$embalagem', imagem = '$img1', nome_imagem = '$nomeImagem', imagem2 = '$img2', imagem3 = '$img3', imagem4 = '$img4', imagem5 = '$img5', imagem6 = '$img6', Tamanho1 = '$tamanho1', Tamanho2 = '$tamanho2', Tamanho3 = '$tamanho3', Tamanho4 = '$tamanho4', qntd_img = '$qntd_img', dif_tam = '$diftam', dif_cor = '$difcor' WHERE id_produto = '$IdProduto' ";
+                                }
+                            if($diftam == "Nao" && $difcor == "Sim")
+                                {
+                                $sql = " UPDATE produtos SET nome_produto = '$nome_produto', resumo = '$resumo', qntd_estoque = '$qntd_estoque', preco = '$preco', cumprimento = '$cumprimento', altura = '$altura', largura = '$largura', peso = '$peso', secao = '$categoria', info_tec = '$info_tec', garantia = '$garantia', embalagem = '$embalagem', imagem = '$img1', nome_imagem = '$nomeImagem', imagem2 = '$img2', imagem3 = '$img3', imagem4 = '$img4', imagem5 = '$img5', imagem6 = '$img6', Cor1 = '$cor1', Cor2 = '$cor2', Cor3 = '$cor3', Cor4 = '$cor4', qntd_img = '$qntd_img', dif_tam = '$diftam', dif_cor = '$difcor' WHERE id_produto = '$IdProduto' ";
+                                }
+
+                            if($diftam == "Nao" && $difcor == "Nao")
+                                {
+                                $sql = " UPDATE produtos SET nome_produto = '$nome_produto', resumo = '$resumo', qntd_estoque = '$qntd_estoque', preco = '$preco', cumprimento = '$cumprimento', altura = '$altura', largura = '$largura', peso = '$peso', secao = '$categoria', info_tec = '$info_tec', garantia = '$garantia', embalagem = '$embalagem', imagem = '$img1', nome_imagem = '$nomeImagem', imagem2 = '$img2', imagem3 = '$img3', imagem4 = '$img4', imagem5 = '$img5', imagem6 = '$img6', qntd_img = '$qntd_img', dif_tam = '$diftam', dif_cor = '$difcor' WHERE id_produto = '$IdProduto' ";
+                                }
+                            
                             if($resultado_id = mysqli_query($link, $sql))
                                 {
                                 return true;
@@ -329,6 +473,8 @@
             $usuario = $_SESSION['id_usuario'];
             $id_produto = $Produto->retornaIdProduto();
             $qntd_produto = $Produto->retornaQntdEstoque();
+            $cor = $Produto->retornaCorEscolhido();
+            $tamanho = $Produto->retornaTamanhoEscolhido();
 
             if($qntd_produto <= 0 || null)
                 {
@@ -346,13 +492,14 @@
                 $estoque = $resultado_consulta['qntd_estoque'];
                 if($qntd_produto <= $estoque)
                     {
-                    $sql = " INSERT INTO carrinho_de_compras(id, id_produto, qntd_produto) values('$usuario', '$id_produto', '$qntd_produto') ";
+                    $sql = " INSERT INTO carrinho_de_compras(id, id_produto, qntd_produto, cor, tamanho) values('$usuario', '$id_produto', '$qntd_produto', '$cor', '$tamanho') ";
                     if($resultado = mysqli_query($link, $sql))
                         {
                         return true;
                         }else 
                             die("Falha ao realizar o registro no banco de dados");
-                    }
+                    }else 
+                        return true;
                 }
             }
 
